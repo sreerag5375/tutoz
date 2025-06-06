@@ -1,6 +1,7 @@
 const config = {
   hero: {
-    heroText: "Instant Doubt Resolution With AI Tutoring",
+    heroTextFirst: "Instant Doubt Resolution With",
+    heroTextSecond: "Tutoring",
     heroPointsOne: "Instant doubt resolution powered by advanced AI",
     heroPointsTwo:
       "Specialized for competitive exams: JEE, NEET, CAT, GATE & UPSC",

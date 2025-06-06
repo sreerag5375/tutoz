@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        righteous: ["Righteous", "cursive"],
+        poppins: ['Poppins', 'sans-serif'],
       },
       colors: {
         primary: {

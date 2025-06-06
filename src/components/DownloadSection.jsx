@@ -21,15 +21,6 @@ const DownloadSection = () => {
     );
   };
 
-  const handleDirectDownload = () => {
-    // Replace with your actual APK download URL
-    window.open(
-      "https://tutoz.com/download/tutoz.apk",
-      "_blank",
-      "noopener,noreferrer"
-    );
-  };
-
   return (
     <section className="py-16 lg:py-">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -110,28 +101,6 @@ const DownloadSection = () => {
                 <span className="text-base">Play Store</span>
               </Button>
               <br />
-              {/* Direct Download Button */}
-              <Button
-                variant="primary"
-                size="medium"
-                onClick={handleDirectDownload}
-                className="w-full sm:w-auto flex items-center justify-center gap-3"
-              >
-                <svg
-                  className="w-4 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                  />
-                </svg>
-                <span className="text-base">Download APK Directly</span>
-              </Button>
             </div>
           </div>
         </div>

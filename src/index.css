@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply font-poppins;
+}
+
 /* Add this to your index.css file for better animations */
 
 /* Smooth scrolling for anchor links */
@@ -44,13 +48,13 @@ html {
 /* Enhanced focus states for accessibility */
 button:focus-visible,
 a:focus-visible {
-  outline: 2px solid #F0B82D;
+  outline: 2px solid #f0b82d;
   outline-offset: 2px;
 }
 
 /* Custom gradient backgrounds */
 .gradient-primary {
-  background: linear-gradient(135deg, #F0B82D 0%, #E5A91C 100%);
+  background: linear-gradient(135deg, #f0b82d 0%, #e5a91c 100%);
 }
 
 .gradient-hero {
@@ -59,11 +63,13 @@ a:focus-visible {
 
 /* Improved shadow effects */
 .shadow-card {
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 .shadow-card-hover {
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 .shadow-card-expanded {
@@ -75,7 +81,7 @@ a:focus-visible {
   .exam-cards-container {
     flex-direction: column;
   }
-  
+
   .exam-card {
     min-height: 200px;
   }
@@ -83,7 +89,8 @@ a:focus-visible {
 
 /* Loading animation for better UX */
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {
@@ -105,10 +112,10 @@ a:focus-visible {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #F0B82D;
+  background: #f0b82d;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #E5A91C;
+  background: #e5a91c;
 }
