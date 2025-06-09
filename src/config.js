@@ -11,6 +11,7 @@ const config = {
     logoIcon: "assets/logo-icon.svg",
     navLogo: "assets/logo.svg",
     heroImage: "assets/hero-image.svg",
+    downloadAppImage: "assets/download-mockup.svg",
   },
 };
 

@@ -1,4 +1,3 @@
-import React from "react";
 import config from "../config";
 import Button from "./Button";
 
@@ -42,9 +41,9 @@ const DownloadSection = () => {
           <div className="relative order-2 lg:order-1">
             <div className="relative z-10 flex justify-center">
               <img
-                src={config.assets.heroImage}
+                src={config.assets.downloadAppImage}
                 alt="Tutoz App Interface"
-                className="w-64 sm:w-80 md:w-96 lg:w-80 xl:w-96 "
+                className="w-80 sm:w-96 md:w-[28rem] lg:w-96 xl:w-[32rem]"
               />
             </div>
           </div>
