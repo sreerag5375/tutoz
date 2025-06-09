@@ -38,7 +38,7 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <nav className="flex space-x-8">
+            {/* <nav className="flex space-x-8">
               <a
                 href="#"
                 className="text-gray-900 hover:text-gray-600 font-medium transition-colors duration-200"
@@ -51,7 +51,7 @@ const Navbar = () => {
               >
                 About Us
               </a>
-            </nav>
+            </nav> */}
 
             {/* Primary Button */}
             <Button
