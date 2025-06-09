@@ -72,25 +72,25 @@ const ExamCards = () => {
             d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
           />
         </svg>
-      )
+      ),
     };
-    
+
     return icons[iconType] || icons.graduation;
   };
 
   return (
-    <section className="py-16 lg:py-24 bg-white">
+    <section className="py-12 lg:py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl lg:text-4xl font-semibold text-gray-900 mb-4">
-            Your Gateway to India's Top Exams
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold mb-4 text-title">
+            {config.exams.title}
           </h2>
         </div>
 
         {/* Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {config.exams.map((exam) => (
+          {config.exams.data.map((exam) => (
             <div
               key={exam.id}
               className={`relative group rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-48 cursor-pointer ${exam.color}`}
@@ -98,23 +98,41 @@ const ExamCards = () => {
               onMouseLeave={() => setHoveredCard(null)}
             >
               {/* Default Card Content */}
-              <div className={`absolute inset-0 p-4 flex flex-col items-center justify-center text-center transition-all duration-300 ${hoveredCard === exam.id ? 'opacity-0 transform -translate-y-4' : 'opacity-100 transform translate-y-0'}`}>
+              <div
+                className={`absolute inset-0 p-4 flex flex-col items-center justify-center text-center transition-all duration-300 ${
+                  hoveredCard === exam.id
+                    ? "opacity-0 transform -translate-y-4"
+                    : "opacity-100 transform translate-y-0"
+                }`}
+              >
                 <div className="flex items-center justify-center mb-4">
                   <div className="text-white mr-2">
                     {getIcon(exam.iconType)}
                   </div>
-                  <h3 className="font-semibold text-lg sm:text-xl text-white">{exam.name}</h3>
+                  <h3 className="font-semibold text-lg sm:text-xl text-white">
+                    {exam.name}
+                  </h3>
                 </div>
               </div>
 
               {/* Hover Effect: Show Details */}
               <div
-                className={`absolute inset-0 bg-white p-4 flex flex-col justify-start transition-all duration-300 ${hoveredCard === exam.id ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'}`}
+                className={`absolute inset-0 bg-white p-4 flex flex-col justify-start transition-all duration-300 ${
+                  hoveredCard === exam.id
+                    ? "opacity-100 transform translate-y-0"
+                    : "opacity-0 transform translate-y-4"
+                }`}
               >
                 <div className="text-center mt-2">
-                  <h3 className="text-xl font-semibold text-gray-800 mb-2">{exam.name}</h3>
-                  <h4 className="text-md font-semibold text-gray-600 mb-3">{exam.title}</h4>
-                  <p className="text-gray-600 text-sm leading-relaxed">{exam.description}</p>
+                  <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                    {exam.name}
+                  </h3>
+                  <h4 className="text-md font-semibold text-gray-600 mb-3">
+                    {exam.title}
+                  </h4>
+                  <p className="text-gray-600 text-sm leading-relaxed">
+                    {exam.description}
+                  </p>
                 </div>
               </div>
             </div>

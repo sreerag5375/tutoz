@@ -1,53 +1,13 @@
 import React from "react";
+import config from "../config";
 
 const ComparisonSection = () => {
-  const features = [
-    {
-      feature: "AI-powered instant doubt resolution",
-      tutoz: true,
-      others: false,
-    },
-    {
-      feature: "Specialized for competitive exams",
-      tutoz: true,
-      others: false,
-    },
-    {
-      feature: "Photo upload for handwritten questions",
-      tutoz: true,
-      others: true,
-    },
-    {
-      feature: "Follow-up questions to clarify concepts",
-      tutoz: true,
-      others: false,
-    },
-    {
-      feature: "Personalized learning paths",
-      tutoz: true,
-      others: false,
-    },
-    {
-      feature: "Available 24/7, no waiting",
-      tutoz: true,
-      others: false,
-    },
-    {
-      feature: "Created by IIT experts",
-      tutoz: true,
-      others: false,
-    },
-    {
-      feature: "Affordable monthly subscription",
-      tutoz: true,
-      others: true,
-    },
-  ];
+  const { comparison } = config;
 
   const CheckIcon = () => (
-    <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+    <div className="w-5 h-5 sm:w-6 sm:h-6 bg-green-500 rounded-full flex items-center justify-center">
       <svg
-        className="w-4 h-4 text-white"
+        className="w-3 h-3 sm:w-4 sm:h-4 text-white"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -63,9 +23,9 @@ const ComparisonSection = () => {
   );
 
   const CrossIcon = () => (
-    <div className="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center">
+    <div className="w-5 h-5 sm:w-6 sm:h-6 bg-red-500 rounded-full flex items-center justify-center">
       <svg
-        className="w-4 h-4 text-white"
+        className="w-3 h-3 sm:w-4 sm:h-4 text-white"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -81,41 +41,45 @@ const ComparisonSection = () => {
   );
 
   return (
-    <section className="py-16 lg:py-24 bg-gray-50">
+    <section className="py-12 lg:py-24 bg-gray-50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-4xl font-semibold">
-            <span style={{ color: "#004077" }}>Why </span>
-            <span className="text-primary">Tutoz</span>
-            <span style={{ color: "#004077" }}> stands out</span>
+        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold mb-4 text-title">
+            <span>{comparison.title.first}</span>
+            <span className="text-primary">{comparison.title.highlight}</span>
+            <span>{comparison.title.last}</span>
           </h2>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-            Compare Tutoz with traditional apps and see the difference
+          <p className="text-base sm:text-lg max-w-2xl mx-auto text-gray-600">
+            {comparison.description}
           </p>
         </div>
 
         {/* Comparison Table */}
-        <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+        <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl overflow-hidden">
           {/* Table Layout */}
           <div className="overflow-x-auto">
             <table className="min-w-full table-auto">
               <thead>
                 <tr className="bg-gray-100">
-                  <th className="px-6 py-4 text-left text-xl font-bold text-gray-900">Features</th>
-                  <th className="px-6 py-4 text-center text-xl font-bold text-primary">Tutoz</th>
-                  <th className="px-6 py-4 text-center text-xl font-bold text-gray-900">Other Apps</th>
+                  <th className="px-3 sm:px-6 py-3 sm:py-4 text-left text-base sm:text-lg lg:text-xl font-bold text-gray-900">{comparison.tableHeaders.features}</th>
+                  <th className="px-3 sm:px-6 py-3 sm:py-4 text-center text-base sm:text-lg lg:text-xl font-bold text-primary">{comparison.tableHeaders.tutoz}</th>
+                  <th className="px-3 sm:px-6 py-3 sm:py-4 text-center text-base sm:text-lg lg:text-xl font-bold text-gray-900">{comparison.tableHeaders.others}</th>
                 </tr>
               </thead>
               <tbody>
-                {features.map((item, index) => (
+                {comparison.features.map((feature, index) => (
                   <tr key={index} className="border-t hover:bg-gray-50 transition-colors duration-200">
-                    <td className="px-6 py-4 text-lg font-medium text-gray-900">{item.feature}</td>
-                    <td className="px-6 py-4 text-center">
-                      {item.tutoz ? <CheckIcon /> : <CrossIcon />}
+                    <td className="px-3 sm:px-6 py-3 sm:py-4 text-sm sm:text-base lg:text-lg font-medium text-gray-900">{feature}</td>
+                    <td className="px-3 sm:px-6 py-3 sm:py-4">
+                      <div className="flex justify-center">
+                        <CheckIcon />
+                      </div>
                     </td>
-                    <td className="px-6 py-4 text-center">
-                      {item.others ? <CheckIcon /> : <CrossIcon />}
+                    <td className="px-3 sm:px-6 py-3 sm:py-4">
+                      <div className="flex justify-center">
+                        {feature === "Photo upload for handwritten questions" || feature === "Affordable monthly subscription" ? <CheckIcon /> : <CrossIcon />}
+                      </div>
                     </td>
                   </tr>
                 ))}

@@ -1,38 +1,10 @@
 import React, { useState, useEffect } from "react";
+import config from "../config";
 import Button from "./Button";
 
 const HowItWorksSection = () => {
   const [activeStep, setActiveStep] = useState(0);
-
-  const steps = [
-    {
-      id: 1,
-      title: "Submit a question",
-      description:
-        "Type your academic question directly or upload photos of handwritten problems, textbook exercises, worksheets, or any study material from any subject.",
-      image: "assets/hwo-it work-step-1.svg",
-    },
-    {
-      id: 2,
-      title: "Get clear step-by-step guidance",
-      description:
-        "Follow the easiest and most detailed breakdown of how to approach and solve the question.",
-      image: "/assets/hwo-it work-step-2.svg",
-    },
-    {
-      id: 3,
-      title: "Need help? Just ask.",
-      description:
-        "If one of the steps is unclear, ask for help and get personalised help.",
-      image: "/assets/hwo-it work-step-3.svg",
-    },
-    {
-      id: 4,
-      title: "Get help with your questions",
-      description: "Never get stuck again. Chat until you get it",
-      image: "/assets/hwo-it work-step-4.svg",
-    },
-  ];
+  const { howItWorks } = config;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,8 +18,8 @@ const HowItWorksSection = () => {
 
       // Calculate which step should be active based on scroll position
       const stepIndex = Math.min(
-        Math.floor(scrollProgress * steps.length),
-        steps.length - 1
+        Math.floor(scrollProgress * howItWorks.steps.length),
+        howItWorks.steps.length - 1
       );
 
       setActiveStep(Math.max(0, stepIndex));
@@ -55,31 +27,28 @@ const HowItWorksSection = () => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [steps.length]);
+  }, [howItWorks.steps.length]);
 
   return (
     <section
       id="how-it-works"
-      className="py-12 sm:py-16 lg:py-24 bg-gray-50"
+      className="py-12 lg:py-24 bg-gray-50"
       style={{ minHeight: "200vh" }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-8 sm:mb-12 lg:mb-16">
-          <h2
-            className="text-2xl sm:text-3xl lg:text-4xl font-semibold mb-4 text-title"
-          >
-            We simplify learning
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold mb-4 text-title">
+            {howItWorks.title}
           </h2>
           <p className="text-gray-600 text-base sm:text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed">
-            Master difficult questions quickly. Get step-by-step explanations
-            and one-on-one help when you're stuck.
+            {howItWorks.description}
           </p>
         </div>
 
         {/* Steps Container */}
         <div className="relative">
-          {steps.map((step, index) => (
+          {howItWorks.steps.map((step, index) => (
             <div
               key={step.id}
               className={`
@@ -102,9 +71,9 @@ const HowItWorksSection = () => {
               }}
             >
               <div className="bg-white rounded-3xl shadow-2xl overflow-hidden max-w-5xl mx-auto">
-                <div className="grid grid-cols-1 lg:grid-cols-2 items-center min-h-[400px] sm:min-h-[450px] lg:min-h-[500px]">
+                <div className="grid grid-cols-1 md:grid-cols-2 items-center min-h-[400px] sm:min-h-[450px] lg:min-h-[500px]">
                   {/* Left Content */}
-                  <div className="p-6 sm:p-8 lg:p-12 order-2 lg:order-1">
+                  <div className="p-6 sm:p-8 lg:p-12 order-2 md:order-1">
                     <div className="space-y-4 sm:space-y-6">
                       {/* Step Number */}
                       <div className="flex items-center space-x-3">
@@ -119,24 +88,24 @@ const HowItWorksSection = () => {
                       </div>
 
                       {/* Title */}
-                      <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 leading-tight">
+                      <h3 className="text-base sm:text-lg lg:text-3xl font-bold text-gray-900 leading-tight">
                         {step.title}
                       </h3>
 
                       {/* Description */}
-                      <p className="text-gray-600 text-base sm:text-lg leading-relaxed">
+                      <p className="text-sm sm:text-base lg:text-lg leading-relaxed text-gray-600">
                         {step.description}
                       </p>
 
                       {/* Progress Indicator */}
                       <div className="flex space-x-2 pt-2 sm:pt-4">
-                        {steps.map((_, idx) => (
+                        {howItWorks.steps.map((_, idx) => (
                           <div
                             key={idx}
                             className={`h-2 rounded-full transition-all duration-300 ${
                               idx <= activeStep ? "bg-primary" : "bg-gray-200"
                             }`}
-                            style={{ width: `${100 / steps.length}%` }}
+                            style={{ width: `${100 / howItWorks.steps.length}%` }}
                           />
                         ))}
                       </div>
@@ -144,11 +113,11 @@ const HowItWorksSection = () => {
                   </div>
 
                   {/* Right Image */}
-                  <div className="relative order-1 lg:order-2 min-h-[250px] sm:min-h-[300px] lg:min-h-[500px]">
+                  <div className="relative bg order-1 md:order-2 min-h-[250px] sm:min-h-[300px] lg:min-h-[500px]">
                     <img
                       src={step.image}
                       alt={step.title}
-                      className="w-full h-full object-cover rounded-r-3xl lg:rounded-r-3xl"
+                      className="w-full h-full object-cover rounded-r-3xl md:rounded-r-3xl"
                     />
                   </div>
                 </div>

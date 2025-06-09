@@ -60,77 +60,80 @@ const PricingSection = () => {
   ];
 
   return (
-    <section className="py-16 lg:py-24 bg-white">
+    <section className="py-12 lg:py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-4xl font-semibold text-title mb-6">
+        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-title">
             Choose your plan
           </h2>
         </div>
 
         {/* Pricing Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="flex flex-wrap justify-center gap-4 sm:gap-6 lg:gap-8 max-w-6xl mx-auto">
           {plans.map((plan) => (
             <div
               key={plan.id}
               className={`
-                relative bg-white rounded-3xl p-8 shadow-lg border-2 transition-all duration-300
+                relative bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 shadow-lg border-2 transition-all duration-300
+                w-full max-w-sm sm:max-w-sm md:max-w-xs lg:max-w-sm xl:flex-1
                 ${
                   plan.popular
-                    ? "border-primary scale-105"
+                    ? "border-primary scale-100 sm:scale-105"
                     : "border-gray-200 hover:border-gray-300"
                 }
               `}
             >
               {/* Popular Badge */}
               {plan.popular && (
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <span className="bg-primary text-white px-6 py-2 rounded-full text-sm font-medium">
+                <div className="absolute -top-3 sm:-top-4 left-1/2 transform -translate-x-1/2">
+                  <span className="bg-primary text-white px-4 sm:px-6 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium">
                     Most Popular
                   </span>
                 </div>
               )}
 
               {/* Plan Header */}
-              <div className="text-center mb-6">
+              <div className="text-center mb-4 sm:mb-6 mt-2 sm:mt-0">
                 <h3
-                  className="text-xl sm:text-2xl font-semibold mb-3"
+                  className="text-lg sm:text-xl lg:text-2xl font-semibold mb-2 sm:mb-3"
                   style={{ color: "#004077" }}
                 >
                   {plan.name}
                 </h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
+                <p className="text-gray-600 text-base leading-relaxed">
                   {plan.description}
                 </p>
               </div>
 
               {/* Price */}
-              <div className="text-center mb-6">
+              <div className="text-center mb-4 sm:mb-6">
                 <div className="flex items-baseline justify-center">
-                  <span className="text-lg font-semibold text-gray-900">
+                  <span className="text-sm sm:text-lg font-semibold text-gray-900">
                     {plan.currency}
                   </span>
-                  <span className="text-3xl lg:text-4xl font-semibold text-gray-900 mx-1">
+                  <span className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-gray-900 mx-1">
                     {plan.price}
                   </span>
-                  <span className="text-gray-500">/ {plan.period}</span>
+                  <span className="text-gray-500 text-base sm:text-base">/ {plan.period}</span>
                 </div>
               </div>
 
-              {/* Features Title (Replaces Button) */}
-              <div className="mb-6">
-                <h4 className="text-lg font-semibold text-gray-800">Features</h4>
+              {/* Features Title */}
+              <div className="mb-4 sm:mb-6">
+                <h4 className="text-base sm:text-lg font-semibold text-gray-800">
+                  Features
+                </h4>
               </div>
 
               {/* Features List */}
-              <div className="space-y-4 mb-8">
+              <div className="space-y-2 sm:space-y-3 lg:space-y-4 mb-6 sm:mb-8">
                 {plan.features.map((feature, index) => (
-                  <div key={index} className="flex items-center space-x-3">
+                  <div key={index} className="flex items-center space-x-2 sm:space-x-3">
                     {feature.included ? (
-                      <div className="flex-shrink-0 w-5 h-5 bg-green-500 rounded-full flex items-center justify-center">
+                      <div className="flex-shrink-0 w-4 h-4 sm:w-5 sm:h-5 bg-green-500 rounded-full flex items-center justify-center">
                         <svg
-                          className="w-3 h-3 text-white"
+                          className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-white"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -144,9 +147,9 @@ const PricingSection = () => {
                         </svg>
                       </div>
                     ) : (
-                      <div className="flex-shrink-0 w-5 h-5 bg-gray-300 rounded-full flex items-center justify-center">
+                      <div className="flex-shrink-0 w-4 h-4 sm:w-5 sm:h-5 bg-gray-300 rounded-full flex items-center justify-center">
                         <svg
-                          className="w-3 h-3 text-gray-500"
+                          className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-gray-500"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -161,7 +164,7 @@ const PricingSection = () => {
                       </div>
                     )}
                     <span
-                      className={`text-sm ${
+                      className={`text-base ${
                         feature.included
                           ? "text-gray-900"
                           : "text-gray-400 line-through"
@@ -177,8 +180,8 @@ const PricingSection = () => {
               <div className="mt-auto">
                 <Button
                   variant={plan.buttonVariant}
-                  size="large"
-                  className="w-full"
+                  size="medium"
+                  className="w-full text-base sm:text-base py-2 sm:py-3"
                   onClick={() => console.log(`Selected ${plan.name} plan`)}
                 >
                   {plan.buttonText}

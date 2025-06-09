@@ -24,7 +24,7 @@ const Hero = () => {
           {/* Content */}
           <div className="text-center lg:text-left pt-20 lg:p-4">
             <h1
-              className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-gray-900 mb-6"
+              className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-title-dark mb-6"
               style={{ lineHeight: "1.16" }}
             >
               {config.hero.heroTextFirst}
