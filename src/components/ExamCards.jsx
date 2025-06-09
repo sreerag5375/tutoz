@@ -9,7 +9,7 @@ const ExamCards = () => {
       name: "JEE",
       title: "Joint Entrance Examination",
       description:
-        "JEE is a national level entrance exam conducted for admission to various engineering colleges and courses all over the country. It consists of JEE Main and JEE Advanced, testing students in Physics, Chemistry, and Mathematics.",
+        "JEE is a national level entrance exam conducted for admission to various engineering colleges and courses all over the country.",
       color: "bg-blue-500",
       lightBg: "bg-blue-50",
       icon: (
@@ -33,7 +33,7 @@ const ExamCards = () => {
       name: "NEET",
       title: "National Eligibility cum Entrance Test",
       description:
-        "NEET is the national level medical entrance exam for admission to MBBS, BDS, and other medical courses in India. It tests students in Physics, Chemistry, and Biology, and is conducted by the National Testing Agency.",
+        "NEET is the national level medical entrance exam for admission to MBBS, BDS, and other medical courses in India.",
       color: "bg-green-600",
       lightBg: "bg-green-50",
       icon: (
@@ -57,7 +57,7 @@ const ExamCards = () => {
       name: "GATE",
       title: "Graduate Aptitude Test in Engineering",
       description:
-        "GATE is a national level examination that tests comprehensive understanding of undergraduate subjects in engineering and science. It serves as a gateway for admission to postgraduate programs and PSU recruitment.",
+        "GATE is a national level examination that tests comprehensive understanding of undergraduate subjects in engineering and science. ",
       color: "bg-orange-500",
       lightBg: "bg-orange-50",
       icon: (
@@ -87,7 +87,7 @@ const ExamCards = () => {
       name: "CAT",
       title: "Common Admission Test",
       description:
-        "CAT is a computer-based test for admission to postgraduate management programs. It evaluates candidates on quantitative ability, verbal ability, reading comprehension, data interpretation, and logical reasoning.",
+        "CAT is a computer-based test for admission to postgraduate management programs. ",
       color: "bg-purple-600",
       lightBg: "bg-purple-50",
       icon: (
@@ -111,7 +111,7 @@ const ExamCards = () => {
       name: "UPSC",
       title: "Union Public Service Commission",
       description:
-        "UPSC Civil Services Examination is conducted for recruitment to various Central Government posts including IAS, IPS, IFS, and other Group A and Group B services. It consists of Prelims, Mains, and Interview rounds.",
+        "UPSC Civil Services Examination is conducted for recruitment to various Central Government posts including IAS, IPS, IFS, and other Group A and Group B services.",
       color: "bg-gray-600",
       lightBg: "bg-gray-50",
       icon: (
@@ -137,7 +137,7 @@ const ExamCards = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl lg:text-4xl font-semibold text-title mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-4xl font-semibold text-gray-900 mb-4">
             Your Gateway to India's Top Exams
           </h2>
         </div>
@@ -147,13 +147,12 @@ const ExamCards = () => {
           {examData.map((exam) => (
             <div
               key={exam.id}
-              className={`relative group rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 ${exam.color}`}
+              className={`relative group rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-48 ${exam.color}`}
               onMouseEnter={() => setHoveredCard(exam.id)}
               onMouseLeave={() => setHoveredCard(null)}
             >
-              {/* Card Content */}
-              <div className="p-6 flex flex-col items-center text-center">
-                {/* Title and Icon in same row */}
+              {/* Default Card Content */}
+              <div className={`absolute inset-0 p-4 flex flex-col items-center justify-center text-center transition-all duration-300 ${hoveredCard === exam.id ? 'opacity-0 transform -translate-y-4' : 'opacity-100 transform translate-y-0'}`}>
                 <div className="flex items-center justify-center mb-4">
                   <div className="text-white rounded-full p-3 mr-3">
                     {exam.icon}
@@ -164,16 +163,13 @@ const ExamCards = () => {
 
               {/* Hover Effect: Show Details */}
               <div
-                className={`absolute bottom-0 left-0 right-0 bg-white p-6 transition-all duration-300 transform ${hoveredCard === exam.id ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}
-                style={{
-                  height: hoveredCard === exam.id ? 'auto' : '0',
-                  paddingTop: '1rem', // Adding top padding
-                }}
+                className={`absolute inset-0 bg-white p-4 flex flex-col justify-start transition-all duration-300 ${hoveredCard === exam.id ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'}`}
               >
-                {/* Title and Exam Name in Hover Section */}
-                <h3 className="text-xl font-semibold text-gray-800 mb-2">{exam.name}</h3> {/* Exam Name in hover */}
-                <h4 className="text-md font-semibold text-gray-800 mb-3">{exam.title}</h4> {/* Exam Title */}
-                <p className="text-gray-600 text-sm mb-4">{exam.description}</p>
+                <div className="text-center mt-2">
+                  <h3 className="text-xl font-semibold text-gray-800 mb-2">{exam.name}</h3>
+                  <h4 className="text-md font-semibold text-gray-600 mb-3">{exam.title}</h4>
+                  <p className="text-gray-600 text-sm leading-relaxed">{exam.description}</p>
+                </div>
               </div>
             </div>
           ))}
