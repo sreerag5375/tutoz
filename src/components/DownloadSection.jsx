@@ -26,7 +26,7 @@ const DownloadSection = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-4xl font-semibold mb-4">
             <span style={{ color: "#004077" }}>Download </span>
             <span className="text-primary">Tutoz</span>
             <span style={{ color: "#004077" }}> today</span>
