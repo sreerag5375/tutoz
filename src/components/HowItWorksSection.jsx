@@ -67,8 +67,7 @@ const HowItWorksSection = () => {
         {/* Section Header */}
         <div className="text-center mb-8 sm:mb-12 lg:mb-16">
           <h2
-            className="text-2xl sm:text-3xl lg:text-4xl font-semibold mb-4"
-            style={{ color: "#004077" }}
+            className="text-2xl sm:text-3xl lg:text-4xl font-semibold mb-4 text-title"
           >
             We simplify learning
           </h2>

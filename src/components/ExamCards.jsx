@@ -1,18 +1,13 @@
 import React, { useState } from "react";
+import config from "../config";
 
 const ExamCards = () => {
   const [hoveredCard, setHoveredCard] = useState(null);
 
-  const examData = [
-    {
-      id: "jee",
-      name: "JEE",
-      title: "Joint Entrance Examination",
-      description:
-        "JEE is a national level entrance exam conducted for admission to various engineering colleges and courses all over the country.",
-      color: "bg-blue-500",
-      lightBg: "bg-blue-50",
-      icon: (
+  // Function to get icon based on type
+  const getIcon = (iconType) => {
+    const icons = {
+      graduation: (
         <svg
           className="w-8 h-8 text-white"
           fill="none"
@@ -27,40 +22,7 @@ const ExamCards = () => {
           />
         </svg>
       ),
-    },
-    {
-      id: "neet",
-      name: "NEET",
-      title: "National Eligibility cum Entrance Test",
-      description:
-        "NEET is the national level medical entrance exam for admission to MBBS, BDS, and other medical courses in India.",
-      color: "bg-green-600",
-      lightBg: "bg-green-50",
-      icon: (
-        <svg
-          className="w-8 h-8 text-white"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
-          />
-        </svg>
-      ),
-    },
-    {
-      id: "gate",
-      name: "GATE",
-      title: "Graduate Aptitude Test in Engineering",
-      description:
-        "GATE is a national level examination that tests comprehensive understanding of undergraduate subjects in engineering and science. ",
-      color: "bg-orange-500",
-      lightBg: "bg-orange-50",
-      icon: (
+      settings: (
         <svg
           className="w-8 h-8 text-white"
           fill="none"
@@ -81,16 +43,7 @@ const ExamCards = () => {
           />
         </svg>
       ),
-    },
-    {
-      id: "cat",
-      name: "CAT",
-      title: "Common Admission Test",
-      description:
-        "CAT is a computer-based test for admission to postgraduate management programs. ",
-      color: "bg-purple-600",
-      lightBg: "bg-purple-50",
-      icon: (
+      calculator: (
         <svg
           className="w-8 h-8 text-white"
           fill="none"
@@ -105,16 +58,7 @@ const ExamCards = () => {
           />
         </svg>
       ),
-    },
-    {
-      id: "upsc",
-      name: "UPSC",
-      title: "Union Public Service Commission",
-      description:
-        "UPSC Civil Services Examination is conducted for recruitment to various Central Government posts including IAS, IPS, IFS, and other Group A and Group B services.",
-      color: "bg-gray-600",
-      lightBg: "bg-gray-50",
-      icon: (
+      book: (
         <svg
           className="w-8 h-8 text-white"
           fill="none"
@@ -128,9 +72,11 @@ const ExamCards = () => {
             d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
           />
         </svg>
-      ),
-    },
-  ];
+      )
+    };
+    
+    return icons[iconType] || icons.graduation;
+  };
 
   return (
     <section className="py-16 lg:py-24 bg-white">
@@ -144,18 +90,18 @@ const ExamCards = () => {
 
         {/* Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {examData.map((exam) => (
+          {config.exams.map((exam) => (
             <div
               key={exam.id}
-              className={`relative group rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-48 ${exam.color}`}
+              className={`relative group rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-48 cursor-pointer ${exam.color}`}
               onMouseEnter={() => setHoveredCard(exam.id)}
               onMouseLeave={() => setHoveredCard(null)}
             >
               {/* Default Card Content */}
               <div className={`absolute inset-0 p-4 flex flex-col items-center justify-center text-center transition-all duration-300 ${hoveredCard === exam.id ? 'opacity-0 transform -translate-y-4' : 'opacity-100 transform translate-y-0'}`}>
                 <div className="flex items-center justify-center mb-4">
-                  <div className="text-white rounded-full p-3 mr-3">
-                    {exam.icon}
+                  <div className="text-white mr-2">
+                    {getIcon(exam.iconType)}
                   </div>
                   <h3 className="font-semibold text-lg sm:text-xl text-white">{exam.name}</h3>
                 </div>
