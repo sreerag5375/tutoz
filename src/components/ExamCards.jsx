@@ -1,8 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import config from "../config";
 
 const ExamCards = () => {
   const [hoveredCard, setHoveredCard] = useState(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+          }
+        });
+      },
+      {
+        threshold: 0.1, // Trigger when 10% of the section is visible
+        rootMargin: "0px 0px -50px 0px", // Start animation slightly before it comes into view
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
 
   // Function to get icon based on type
   const getIcon = (iconType) => {
@@ -79,21 +107,34 @@ const ExamCards = () => {
   };
 
   return (
-    <section className="py-12 lg:py-24 bg-white">
+    <section ref={sectionRef} className="py-12 lg:py-24 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center mb-12">
+        {/* Section Header with fade-in */}
+        <div 
+          className={`text-center mb-12 transition-all duration-800 ease-out ${
+            isVisible 
+              ? 'opacity-100 transform translate-y-0' 
+              : 'opacity-0 transform translate-y-6'
+          }`}
+        >
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold mb-4 text-title">
-            {config.exams.title}
+            Your Gateway to India's Top Exams
           </h2>
         </div>
 
-        {/* Cards Grid */}
+        {/* Cards Grid with staggered animation */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {config.exams.data.map((exam) => (
+          {config.exams.data.map((exam, index) => (
             <div
               key={exam.id}
-              className={`relative group rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-48 cursor-pointer ${exam.color}`}
+              className={`relative group rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 h-48 cursor-pointer ${exam.color} ${
+                isVisible 
+                  ? 'opacity-100 transform translate-y-0 scale-100' 
+                  : 'opacity-0 transform translate-y-8 scale-95'
+              }`}
+              style={{ 
+                transitionDelay: isVisible ? `${200 + index * 100}ms` : '0ms' 
+              }}
               onMouseEnter={() => setHoveredCard(exam.id)}
               onMouseLeave={() => setHoveredCard(null)}
             >
@@ -106,7 +147,7 @@ const ExamCards = () => {
                 }`}
               >
                 <div className="flex items-center justify-center mb-4">
-                  <div className="text-white mr-2">
+                  <div className="text-white mr-2 transition-transform duration-300 group-hover:scale-110">
                     {getIcon(exam.iconType)}
                   </div>
                   <h3 className="font-semibold text-lg sm:text-xl text-white">
@@ -135,6 +176,9 @@ const ExamCards = () => {
                   </p>
                 </div>
               </div>
+
+              {/* Subtle glow effect on hover */}
+              <div className={`absolute inset-0 bg-gradient-to-r from-white/10 to-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none ${hoveredCard !== exam.id ? 'block' : 'hidden'}`} />
             </div>
           ))}
         </div>
@@ -143,4 +187,4 @@ const ExamCards = () => {
   );
 };
 
-export default ExamCards;
+export default ExamCards; 

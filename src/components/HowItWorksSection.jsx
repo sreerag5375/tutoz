@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import config from "../config";
 import Button from "./Button";
 
 const HowItWorksSection = () => {
   const [activeStep, setActiveStep] = useState(0);
+  const [isHeaderVisible, setIsHeaderVisible] = useState(false);
+  const headerRef = useRef(null);
   const { howItWorks } = config;
 
+  // Existing scroll handler for cards
   useEffect(() => {
     const handleScroll = () => {
       const section = document.getElementById("how-it-works");
@@ -29,6 +32,33 @@ const HowItWorksSection = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [howItWorks.steps.length]);
 
+  // New intersection observer for header animation
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsHeaderVisible(true);
+          }
+        });
+      },
+      {
+        threshold: 0.3, // Trigger when 30% of header is visible
+        rootMargin: "0px 0px -100px 0px",
+      }
+    );
+
+    if (headerRef.current) {
+      observer.observe(headerRef.current);
+    }
+
+    return () => {
+      if (headerRef.current) {
+        observer.unobserve(headerRef.current);
+      }
+    };
+  }, []);
+
   return (
     <section
       id="how-it-works"
@@ -36,17 +66,35 @@ const HowItWorksSection = () => {
       style={{ minHeight: "200vh" }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold mb-4 text-title">
+        {/* Section Header with fade-in animation */}
+        <div 
+          ref={headerRef}
+          className="text-center mb-8 sm:mb-12 lg:mb-16"
+        >
+          <h2 
+            className={`text-2xl sm:text-3xl lg:text-4xl font-semibold mb-4 text-title transition-all duration-1000 ease-out ${
+              isHeaderVisible 
+                ? 'opacity-100 transform translate-y-0' 
+                : 'opacity-0 transform translate-y-6'
+            }`}
+          >
             {howItWorks.title}
           </h2>
-          <p className="text-gray-600 text-base sm:text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed">
+          <p 
+            className={`text-gray-600 text-base sm:text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed transition-all duration-1000 ease-out ${
+              isHeaderVisible 
+                ? 'opacity-100 transform translate-y-0' 
+                : 'opacity-0 transform translate-y-4'
+            }`}
+            style={{ 
+              transitionDelay: isHeaderVisible ? '200ms' : '0ms' 
+            }}
+          >
             {howItWorks.description}
           </p>
         </div>
 
-        {/* Steps Container */}
+        {/* Steps Container - keeping existing animation */}
         <div className="relative">
           {howItWorks.steps.map((step, index) => (
             <div
